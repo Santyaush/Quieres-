@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>¿Quieres ser mi novia? 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        height: 100vh;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .container {
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        animation: fadeIn 1.5s ease;
+    }
+
+    h1 {
+        color: #ff4b7d;
+        margin-bottom: 20px;
+        animation: bounce 2s infinite;
+    }
+
+    .buttons {
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        border: none;
+        border-radius: 10px;
+        margin: 10px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    #yes {
+        background: #ff4b7d;
+        color: white;
+    }
+
+    #no {
+        background: #ccc;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+        from {opacity: 0; transform: translateY(20px);}
+        to {opacity: 1; transform: translateY(0);}
+    }
+
+    @keyframes bounce {
+        0%, 100% {transform: translateY(0);}
+        50% {transform: translateY(-10px);}
+    }
+
+    /* corazones flotando */
+    .heart {
+        position: absolute;
+        color: rgba(255, 75, 125, 0.6);
+        font-size: 20px;
+        animation: float 6s linear infinite;
+    }
+
+    @keyframes float {
+        0% {transform: translateY(100vh) scale(0.5);}
+        100% {transform: translateY(-10vh) scale(1.2);}
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container" id="main">
+    <h1>¿Quieres ser mi novia? 💖</h1>
+    <p>Prometo hacerte muy feliz 🥺</p>
+
+    <div class="buttons">
+        <button id="yes">Sí 💕</button>
+        <button id="no">No 😢</button>
+    </div>
+</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const main = document.getElementById("main");
+
+    let scale = 1;
+
+    noBtn.addEventListener("click", () => {
+        // mover botón a posición aleatoria
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        // hacerlo más pequeño cada vez
+        scale -= 0.15;
+        if (scale > 0) {
+            noBtn.style.transform = "scale(" + scale + ")";
+        } else {
+            noBtn.style.display = "none";
+        }
+    });
+
+    yesBtn.addEventListener("click", () => {
+        main.innerHTML = `
+            <h1>💖 ¡Gracias por decir que sí! 💖</h1>
+            <p>
+                Prometo cuidarte, hacerte reír y estar contigo en todo momento.<br><br>
+                Me haces muy feliz y quiero compartir contigo momentos increíbles 💕<br><br>
+                Te quiero muchísimo 🥺❤️
+            </p>
+        `;
+    });
+
+    // generar corazones
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.innerHTML = "💖";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = Math.random() * 20 + 15 + "px";
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 6000);
+    }
+
+    setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

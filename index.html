@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>💖 Para ti 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+
+    /* IMAGEN DE FONDO */
+    background: url('https://cincuentaytrescuarentaynueve.com/wp-content/uploads/2024/11/EDM_D2_001-1152x1536.jpeg') no-repeat center center/cover;
+}
+
+/* efecto oscuro encima para que se vea bonito */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    top: 0;
+    left: 0;
+}
+
+/* caja */
+.container {
+    position: relative;
+    background: rgba(255,255,255,0.9);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+h1 {
+    color: #ff4b7d;
+}
+
+/* botones */
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+#yes {
+    background: #ff4b7d;
+    color: white;
+}
+
+#no {
+    background: gray;
+}
+
+/* corazones */
+.heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    z-index: 0;
+}
+
+@keyframes float {
+    0% {transform: translateY(100vh);}
+    100% {transform: translateY(-10vh);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- MÚSICA DE FONDO -->
+<iframe width="0" height="0" 
+src="https://www.youtube.com/embed/t9gbV6_CE0E?autoplay=1&loop=1&playlist=t9gbV6_CE0E" 
+frameborder="0" allow="autoplay">
+</iframe>
+
+<div class="container" id="main">
+    <h1>¿Quieres ser mi novia? 💖</h1>
+
+    <button id="yes">Sí 💕</button>
+    <button id="no">No 😢</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+const main = document.getElementById("main");
+
+let scale = 1;
+
+noBtn.addEventListener("click", () => {
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    scale -= 0.15;
+    if (scale > 0) {
+        noBtn.style.transform = "scale(" + scale + ")";
+    } else {
+        noBtn.style.display = "none";
+    }
+});
+
+yesBtn.addEventListener("click", () => {
+    main.innerHTML = `
+        <h1>💖 Gracias corazón 💖</h1>
+        <p>
+        Prometo siempre estar para ti, en cada momento,<br>
+        para siempre y por siempre,<br><br>
+        <b>TE AMO MI NENA ❤️</b><br><br>
+        Eres tú &lt;3
+        </p>
+    `;
+
+    const audio = document.createElement("iframe");
+    audio.width = "0";
+    audio.height = "0";
+    audio.src = "https://www.youtube.com/embed/kuUiFQis1hg?autoplay=1&loop=1&playlist=kuUiFQis1hg";
+    audio.allow = "autoplay";
+    document.body.appendChild(audio);
+});
+
+// corazones
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}
+
+setInterval(createHeart, 300);
+</script>
+
+</body>
+</html>

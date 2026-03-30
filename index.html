@@ -36,7 +36,6 @@ body::before {
     z-index: 1;
 }
 
-/* botón inicial */
 #startBtn {
     font-size: 22px;
     padding: 20px 40px;
@@ -89,11 +88,11 @@ button {
 
 <!-- AUDIOS -->
 <audio id="music1" loop>
-    <source src="AQUI_VA_TU_PRIMER_MP3.mp3" type="audio/mpeg">
+    <source src="https://drive.google.com/uc?export=download&id=1oz35_TNlVlrW9miyUgBuca2mzY1ktBxm" type="audio/mpeg">
 </audio>
 
 <audio id="music2" loop>
-    <source src="AQUI_VA_TU_SEGUNDO_MP3.mp3" type="audio/mpeg">
+    <source src="https://drive.google.com/uc?export=download&id=1JPSRypxPv8BqW82X5HB-y-5ABTKYY62q" type="audio/mpeg">
 </audio>
 
 <div class="container" id="main">
@@ -107,7 +106,6 @@ const music2 = document.getElementById("music2");
 
 document.getElementById("startBtn").addEventListener("click", () => {
 
-    // REPRODUCIR PRIMERA CANCIÓN
     music1.play();
 
     main.innerHTML = `
@@ -139,7 +137,6 @@ document.getElementById("startBtn").addEventListener("click", () => {
 
     yesBtn.addEventListener("click", () => {
 
-        // CAMBIAR CANCIÓN
         music1.pause();
         music2.currentTime = 0;
         music2.play();

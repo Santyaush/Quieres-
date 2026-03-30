@@ -15,11 +15,9 @@ body {
     text-align: center;
     overflow: hidden;
 
-    /* IMAGEN DE FONDO */
     background: url('https://cincuentaytrescuarentaynueve.com/wp-content/uploads/2024/11/EDM_D2_001-1152x1536.jpeg') no-repeat center center/cover;
 }
 
-/* efecto oscuro encima para que se vea bonito */
 body::before {
     content: "";
     position: absolute;
@@ -40,8 +38,22 @@ body::before {
     z-index: 1;
 }
 
-h1 {
-    color: #ff4b7d;
+/* botón inicial */
+#startBtn {
+    font-size: 22px;
+    padding: 20px 40px;
+    background: #ff4b7d;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {transform: scale(1);}
+    50% {transform: scale(1.1);}
+    100% {transform: scale(1);}
 }
 
 /* botones */
@@ -80,59 +92,72 @@ button {
 
 <body>
 
-<!-- MÚSICA DE FONDO -->
-<iframe width="0" height="0" 
-src="https://www.youtube.com/embed/t9gbV6_CE0E?autoplay=1&loop=1&playlist=t9gbV6_CE0E" 
-frameborder="0" allow="autoplay">
-</iframe>
-
 <div class="container" id="main">
-    <h1>¿Quieres ser mi novia? 💖</h1>
-
-    <button id="yes">Sí 💕</button>
-    <button id="no">No 😢</button>
+    <button id="startBtn">💖 Toca aquí 💖</button>
 </div>
 
 <script>
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
 const main = document.getElementById("main");
 
-let scale = 1;
+let music1Played = false;
 
-noBtn.addEventListener("click", () => {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
+document.getElementById("startBtn").addEventListener("click", () => {
 
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    // PRIMERA CANCIÓN
+    const iframe1 = document.createElement("iframe");
+    iframe1.width = "0";
+    iframe1.height = "0";
+    iframe1.src = "https://www.youtube.com/embed/t9gbV6_CE0E?autoplay=1&loop=1&playlist=t9gbV6_CE0E";
+    iframe1.allow = "autoplay";
+    document.body.appendChild(iframe1);
 
-    scale -= 0.15;
-    if (scale > 0) {
-        noBtn.style.transform = "scale(" + scale + ")";
-    } else {
-        noBtn.style.display = "none";
-    }
-});
-
-yesBtn.addEventListener("click", () => {
+    // Mostrar pregunta
     main.innerHTML = `
-        <h1>💖 Gracias corazón 💖</h1>
-        <p>
-        Prometo siempre estar para ti, en cada momento,<br>
-        para siempre y por siempre,<br><br>
-        <b>TE AMO MI NENA ❤️</b><br><br>
-        Eres tú &lt;3
-        </p>
+        <h1>¿Quieres ser mi novia? 💖</h1>
+        <button id="yes">Sí 💕</button>
+        <button id="no">No 😢</button>
     `;
 
-    const audio = document.createElement("iframe");
-    audio.width = "0";
-    audio.height = "0";
-    audio.src = "https://www.youtube.com/embed/kuUiFQis1hg?autoplay=1&loop=1&playlist=kuUiFQis1hg";
-    audio.allow = "autoplay";
-    document.body.appendChild(audio);
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    let scale = 1;
+
+    noBtn.addEventListener("click", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+
+        noBtn.style.position = "absolute";
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+
+        scale -= 0.15;
+        if (scale > 0) {
+            noBtn.style.transform = "scale(" + scale + ")";
+        } else {
+            noBtn.style.display = "none";
+        }
+    });
+
+    yesBtn.addEventListener("click", () => {
+        main.innerHTML = `
+            <h1>💖 Gracias corazón 💖</h1>
+            <p>
+            Prometo siempre estar para ti, en cada momento,<br>
+            para siempre y por siempre,<br><br>
+            <b>TE AMO MI NENA ❤️</b><br><br>
+            Eres tú &lt;3
+            </p>
+        `;
+
+        // SEGUNDA CANCIÓN
+        const iframe2 = document.createElement("iframe");
+        iframe2.width = "0";
+        iframe2.height = "0";
+        iframe2.src = "https://www.youtube.com/embed/kuUiFQis1hg?autoplay=1&loop=1&playlist=kuUiFQis1hg";
+        iframe2.allow = "autoplay";
+        document.body.appendChild(iframe2);
+    });
 });
 
 // corazones

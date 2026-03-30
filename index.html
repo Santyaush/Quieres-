@@ -28,13 +28,11 @@ body::before {
     left: 0;
 }
 
-/* caja */
 .container {
     position: relative;
     background: rgba(255,255,255,0.9);
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     z-index: 1;
 }
 
@@ -56,7 +54,6 @@ body::before {
     100% {transform: scale(1);}
 }
 
-/* botones */
 button {
     padding: 15px 30px;
     font-size: 18px;
@@ -75,12 +72,10 @@ button {
     background: gray;
 }
 
-/* corazones */
 .heart {
     position: absolute;
     font-size: 20px;
     animation: float 6s linear infinite;
-    z-index: 0;
 }
 
 @keyframes float {
@@ -92,26 +87,29 @@ button {
 
 <body>
 
+<!-- AUDIOS -->
+<audio id="music1" loop>
+    <source src="AQUI_VA_TU_PRIMER_MP3.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="music2" loop>
+    <source src="AQUI_VA_TU_SEGUNDO_MP3.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" id="main">
     <button id="startBtn">💖 Toca aquí 💖</button>
 </div>
 
 <script>
 const main = document.getElementById("main");
-
-let music1Played = false;
+const music1 = document.getElementById("music1");
+const music2 = document.getElementById("music2");
 
 document.getElementById("startBtn").addEventListener("click", () => {
 
-    // PRIMERA CANCIÓN
-    const iframe1 = document.createElement("iframe");
-    iframe1.width = "0";
-    iframe1.height = "0";
-    iframe1.src = "https://www.youtube.com/embed/t9gbV6_CE0E?autoplay=1&loop=1&playlist=t9gbV6_CE0E";
-    iframe1.allow = "autoplay";
-    document.body.appendChild(iframe1);
+    // REPRODUCIR PRIMERA CANCIÓN
+    music1.play();
 
-    // Mostrar pregunta
     main.innerHTML = `
         <h1>¿Quieres ser mi novia? 💖</h1>
         <button id="yes">Sí 💕</button>
@@ -140,6 +138,12 @@ document.getElementById("startBtn").addEventListener("click", () => {
     });
 
     yesBtn.addEventListener("click", () => {
+
+        // CAMBIAR CANCIÓN
+        music1.pause();
+        music2.currentTime = 0;
+        music2.play();
+
         main.innerHTML = `
             <h1>💖 Gracias corazón 💖</h1>
             <p>
@@ -149,14 +153,6 @@ document.getElementById("startBtn").addEventListener("click", () => {
             Eres tú &lt;3
             </p>
         `;
-
-        // SEGUNDA CANCIÓN
-        const iframe2 = document.createElement("iframe");
-        iframe2.width = "0";
-        iframe2.height = "0";
-        iframe2.src = "https://www.youtube.com/embed/kuUiFQis1hg?autoplay=1&loop=1&playlist=kuUiFQis1hg";
-        iframe2.allow = "autoplay";
-        document.body.appendChild(iframe2);
     });
 });
 
